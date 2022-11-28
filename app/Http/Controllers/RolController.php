@@ -8,7 +8,7 @@ use App\Models\rol;
 class RolController extends Controller
 {
     
-    public function getAll(){
+    public function getAll(Request $request){
         return response()->json(rol::all(),200);
     }
 

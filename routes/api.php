@@ -6,7 +6,8 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\Auth;
+use App\Http\Middleware\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,29 +20,31 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/rol', [RolController::class, 'getAll']);
-Route::get('/rol/{id}', [RolController::class, 'getById']);
-Route::post('/rol', [RolController::class, 'createRol']);
-Route::put('/rol/{id}', [RolController::class, 'updateRol']);
-Route::delete('/rol/{id}', [RolController::class, 'deleteRol']);
+Route::get('/rol', [RolController::class, 'getAll'])->middleware(Admin::class);
+Route::get('/rol/{id}', [RolController::class, 'getById'])->middleware(Admin::class);
+Route::post('/rol', [RolController::class, 'createRol'])->middleware(Admin::class);
+Route::put('/rol/{id}', [RolController::class, 'updateRol'])->middleware(Admin::class);
+Route::delete('/rol/{id}', [RolController::class, 'deleteRol'])->middleware(Admin::class);
 
-Route::get('/categoria', [CategoriaController::class, 'getAll']);
-Route::get('/categoria/{id}', [CategoriaController::class, 'getById']);
-Route::post('/categoria', [CategoriaController::class, 'createCategoria']);
-Route::put('/categoria/{id}', [CategoriaController::class, 'updateCategoria']);
-Route::delete('/categoria/{id}', [CategoriaController::class, 'deleteCategoria']);
+Route::get('/categoria', [CategoriaController::class, 'getAll'])->middleware(Admin::class);
+Route::get('/categoria/{id}', [CategoriaController::class, 'getById'])->middleware(Admin::class);
+Route::post('/categoria', [CategoriaController::class, 'createCategoria'])->middleware(Admin::class);
+Route::put('/categoria/{id}', [CategoriaController::class, 'updateCategoria'])->middleware(Admin::class);
+Route::delete('/categoria/{id}', [CategoriaController::class, 'deleteCategoria'])->middleware(Admin::class);
 
-Route::get('/usuario', [UsuarioController::class, 'getAll']);
-Route::get('/usuario/{id}', [UsuarioController::class, 'getById']);
-Route::post('/usuario', [UsuarioController::class, 'createUser']);
-Route::put('/usuario/{id}', [UsuarioController::class, 'updateUser']);
-Route::delete('/usuario', [UsuarioController::class, 'deleteUser']);
+Route::get('/usuario', [UsuarioController::class, 'getAll'])->middleware(Admin::class);
+Route::get('/usuario/{id}', [UsuarioController::class, 'getById'])->middleware(Admin::class);
+Route::post('/usuario', [UsuarioController::class, 'createUser'])->middleware(Admin::class);
+Route::put('/usuario/{id}', [UsuarioController::class, 'updateUser'])->middleware(Admin::class);
+Route::delete('/usuario', [UsuarioController::class, 'deleteUser'])->middleware(Admin::class);
 
-Route::get('/post', [PostController::class, 'getAll']);
-Route::get('/post/{id}', [PostController::class, 'getById']);
-Route::post('/post', [PostController::class, 'createPost']);
-Route::put('/post/{id}', [PostController::class, 'updatePost']);
-Route::delete('/post', [PostController::class, 'deletePost']);
+Route::get('/post', [PostController::class, 'getAll'])->middleware(Admin::class);
+Route::get('/post/{id}', [PostController::class, 'getById'])->middleware(Admin::class);
+Route::post('/post', [PostController::class, 'createPost'])->middleware(Admin::class);
+Route::put('/post/{id}', [PostController::class, 'updatePost'])->middleware(Admin::class);
+Route::delete('/post', [PostController::class, 'deletePost'])->middleware(Admin::class);
+
+Route::post('/auth', [Auth::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
