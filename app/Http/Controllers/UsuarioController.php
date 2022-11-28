@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\usuario;
 use App\Models\rol;
 
@@ -38,6 +39,15 @@ class UsuarioController extends Controller
         $correo = $request->all()["correo"];
         $password = $request->all()["password"];
         $nombre = $request->all()["nombre"];
+        $requestCopy = $request->all();
+
+        $hashed = Hash::make($password, [
+            'rounds' => 12,
+        ]);
+
+        return response($hashed,200);
+
+        $requestCopy["password"]=$hashed;
 
         if($id_rol == null || $correo == null || $password == null || $nombre == null){
             return response()->json(["message"=>'Los campos id_rol, correo, nombre y password son obligatorios'], 404);
@@ -47,7 +57,7 @@ class UsuarioController extends Controller
 
         if(is_null($rol)) return response()->json(["message"=>'El rol asociado no existe en la base de datos'], 404);
 
-        $user =usuario::create($request->all());
+        $user =usuario::create($requestCopy);
 
         return response()->json($user, 200);
 

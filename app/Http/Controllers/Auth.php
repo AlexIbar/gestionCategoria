@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -17,7 +18,7 @@ class Auth extends Controller
         $dataSearch = $request->all();
 
         $user = usuario::select('id', 'correo', 'password')
-        -> where('correo','=',$dataSearch["email"])
+        -> where('correo','=',$dataSearch["correo"])
         ->get();
 
         $key = env("JWT_SECRET");
@@ -25,12 +26,14 @@ class Auth extends Controller
         if(count($user->all())==0){
             return response("El usuario no existe en la base de datos", 404);
         }
-
-        if($user->all()[0]["password"] == $dataSearch["password"]){
-
+        
+        if (Hash::check($dataSearch["password"], $user->all()[0]["password"])) {
             $userT = usuario::find($user->all()[0]["id"]);
             $rol = $userT->rol;
-            $payload = ["rol" =>$rol["nombre"]];
+            $payload = [
+                "rol" =>$rol["nombre"],
+                "id" => $user->all()[0]["id"]
+            ];
     
             $jwt = JWT::encode($payload, $key, 'HS256');
 
