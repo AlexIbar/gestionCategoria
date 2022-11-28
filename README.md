@@ -21,6 +21,8 @@ Enlace: https://github.com/AlexIbar/gestionCategoria.git
 
 # Descripción de rutas
 
+### Authentication
+- POST: api/auth - Permite loguear un usuario
 ### Rol Controller
 - GET: api/RolController - Envia toda la información del controller
 - GET: api/RolController - Envia el ID del controller
