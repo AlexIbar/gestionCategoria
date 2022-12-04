@@ -61,7 +61,7 @@ class Admin
         if(is_null($request->header('Authorization'))){
             return response($mensaje,401);
         }
-        
+
         $jwt =explode(" ",$request->header('Authorization'))[1];
         $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
         $array = json_decode(json_encode($decoded), true);

@@ -36,13 +36,13 @@ Route::get('/usuario', [UsuarioController::class, 'getAll'])->middleware(Admin::
 Route::get('/usuario/{id}', [UsuarioController::class, 'getById'])->middleware(Admin::class);
 Route::post('/usuario', [UsuarioController::class, 'createUser'])->middleware(Admin::class);
 Route::put('/usuario/{id}', [UsuarioController::class, 'updateUser'])->middleware(Admin::class);
-Route::delete('/usuario', [UsuarioController::class, 'deleteUser'])->middleware(Admin::class);
+Route::delete('/usuario/{id}', [UsuarioController::class, 'deleteUser'])->middleware(Admin::class);
 
 Route::get('/post', [PostController::class, 'getAll'])->middleware(Admin::class);
 Route::get('/post/{id}', [PostController::class, 'getById'])->middleware(Admin::class);
 Route::post('/post', [PostController::class, 'createPost'])->middleware(Admin::class);
 Route::put('/post/{id}', [PostController::class, 'updatePost'])->middleware(Admin::class);
-Route::delete('/post', [PostController::class, 'deletePost'])->middleware(Admin::class);
+Route::delete('/post/{id}', [PostController::class, 'deletePost'])->middleware(Admin::class);
 
 Route::post('/auth', [Auth::class, 'login']);
 
