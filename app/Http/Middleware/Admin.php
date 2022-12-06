@@ -43,12 +43,15 @@ class Admin
         7 =>"POSTapi/usuario",
         8 =>"PUTapi/usuario",
         9 =>"DELETEapi/usuario",
+        1 =>"GETapi/rol",
     );
     public $lector = array(
         1 =>"GETapi/post",
         3 =>"GETapi/categoria",
         4 =>"GETapi/usuario",
         5 =>"PUTapi/usuario",
+        5 =>"GETapi/categoria",
+        1 =>"GETapi/rol",
     );
     public function handle(Request $request, Closure $next)
     {
