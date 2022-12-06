@@ -45,8 +45,6 @@ class UsuarioController extends Controller
             'rounds' => 12,
         ]);
 
-        return response($hashed,200);
-
         $requestCopy["password"]=$hashed;
 
         if($id_rol == null || $correo == null || $password == null || $nombre == null){
