@@ -27,7 +27,7 @@ class Admin
         7 =>"PUTapi/categoria",
         8 =>"DELETEapi/categoria",
         9 =>"GETapi/post",
-        10 =>"POSTapi/post",
+        10 =>"PUTapi/post",
         12 =>"DELETEapi/post",
         13 =>"GETapi/usuario",
         14 =>"POSTapi/usuario",
@@ -43,7 +43,7 @@ class Admin
         7 =>"POSTapi/usuario",
         8 =>"PUTapi/usuario",
         9 =>"DELETEapi/usuario",
-        1 =>"GETapi/rol",
+        10 =>"GETapi/rol",
     );
     public $lector = array(
         1 =>"GETapi/post",
@@ -64,7 +64,6 @@ class Admin
         if(is_null($request->header('Authorization'))){
             return response($mensaje,401);
         }
-
         $jwt =explode(" ",$request->header('Authorization'))[1];
         $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
         $array = json_decode(json_encode($decoded), true);

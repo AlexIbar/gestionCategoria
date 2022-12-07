@@ -37,12 +37,12 @@ class PostController extends Controller
             }
         }
         $requestCopy["estado"] = $estado;
-        $validar = validarCreacion($request);
+        $validar = $this->validarCreacion($request);
         if(!$validar){
             return response()->json("La informacion que ingreso no corresponde a la solicitada para que la creación del post sea ejecutada", 404);
         }
 
-        $post =post::create($requestCopy->all());
+        $post =post::create($requestCopy);
 
         return response()->json($post, 200);
 
